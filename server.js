@@ -8,7 +8,7 @@ var express = require("express");
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-var db = require("./models");
+// var db = require("./models");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -25,6 +25,8 @@ app.set("view engine", "handlebars");
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/rferl" ;
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
+require("./routes/api_routes/scraping")(app,axios,cheerio);
 
 
 app.listen(PORT, function() {
